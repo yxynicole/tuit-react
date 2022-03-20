@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const TUITS_API = "https://powerful-citadel-40623.herokuapp.com/tuits";
-const USERS_API = "https://powerful-citadel-40623.herokuapp.com/users";
+const TUITS_API = "https://powerful-citadel-40623.herokuapp.com/api/tuits";
+const USERS_API = "https://powerful-citadel-40623.herokuapp.com/api/users";
 
 export const findAllTuits = () =>
     axios.get(TUITS_API)
@@ -17,7 +17,7 @@ export const findTuitByUser = (uid) =>
 
 export const createTuit = (uid, tuit) =>
     axios.post(`${USERS_API}/${uid}/tuits`, tuit)
-        .then(response => response.data);
+        .then(response => response.data).catch(e => e.response.data);
 
 export const updateTuit = (tid, tuit) =>
     axios.post(`${TUITS_API}/${tid}`, tuit)

@@ -3,6 +3,7 @@ import {
   deleteUsersByUsername, findAllUsers,
   findUserById
 } from "../services/users-service";
+import axios from "axios";
 
 describe('createUser', () => {
   // sample user to insert
@@ -113,15 +114,15 @@ describe('findAllUsers',  () => {
   ];
 
   // setup data before test
-  beforeAll(() =>
+  beforeAll(async () =>
     // insert several known users
-    usernames.map(username =>
+    await Promise.all(usernames.map(username =>
       createUser({
         username,
         password: `${username}123`,
         email: `${username}@stooges.com`
       })
-    )
+    ))
   );
 
   // clean up after ourselves
