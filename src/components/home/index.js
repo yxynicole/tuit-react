@@ -1,11 +1,11 @@
 import React from "react";
 import Tuits from "../tuits";
 import * as service from "../../services/tuits-service";
-import {useEffect, useState} from "react";
-import {useLocation, useParams} from "react-router-dom";
+import {useState} from "react";
+import {useParams} from "react-router-dom";
 
 const Home = () => {
-  const location = useLocation();
+  //const location = useLocation();
   const {uid} = useParams();
   const [tuits, setTuits] = useState([]);
   const [tuit, setTuit] = useState('');
@@ -19,11 +19,11 @@ const Home = () => {
         .then(tuits => setTuits(tuits))
     }
   }
-  useEffect(() => {
-    let isMounted = true;
-    findTuits()
-    return () => {isMounted = false;}
-  }, []);
+  // useEffect(() => {
+  //   // let isMounted = true;
+  //   findTuits()
+  //   // return () => {isMounted = false;}
+  // }, [uid,findTuits]);
   const createTuit = () =>
       service.createTuit(userId, {tuit})
           .then(findTuits)
@@ -39,7 +39,7 @@ const Home = () => {
           <div className="d-flex">
             <div className="p-2">
               <img className="ttr-width-50px rounded-circle"
-                   src="../images/nasa-logo.jpg"/>
+                   src="../images/nasa-logo.jpg" alt="nasa logo"/>
             </div>
             <div className="p-2 w-100">
               <textarea
@@ -57,11 +57,11 @@ const Home = () => {
                   <i className="far fa-map-location me-3"></i>
                 </div>
                 <div className="col-2">
-                  <a onClick={createTuit}
+                  <button onClick={createTuit}
                      className={`btn btn-primary rounded-pill fa-pull-right
                                   fw-bold ps-4 pe-4`}>
                     Tuit
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
