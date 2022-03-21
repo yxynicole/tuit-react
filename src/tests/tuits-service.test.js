@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import {
     createTuit,
     deleteTuit,
@@ -5,7 +8,6 @@ import {
     findAllTuits
 } from "../services/tuits-service";
 import {createUser, deleteUser, deleteUsersByUsername} from "../services/users-service";
-import axios from "axios";
 
 describe('can create tuit with REST API', () => {
     // sample tuit to insert
@@ -23,9 +25,6 @@ describe('can create tuit with REST API', () => {
     beforeAll(async () => {
         //remove any/all tuitsto make sure we create it in the test
         helloWorld.postedBy = (await createUser(ripley))._id
-        await findAllTuits().then(tuits => tuits.map(t => {
-            deleteTuit(t._id)
-        }))
     })
 
     // clean up after test runs

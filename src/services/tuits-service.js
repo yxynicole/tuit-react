@@ -17,7 +17,7 @@ export const findTuitByUser = (uid) =>
 
 export const createTuit = (uid, tuit) =>
     axios.post(`${USERS_API}/${uid}/tuits`, tuit)
-        .then(response => response.data).catch(e => e.response.data);
+        .then(response => response.data);
 
 export const updateTuit = (tid, tuit) =>
     axios.post(`${TUITS_API}/${tid}`, tuit)
