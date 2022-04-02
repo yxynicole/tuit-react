@@ -3,27 +3,23 @@ import Tuits from "../tuits";
 import * as service from "../../services/tuits-service";
 import {useState} from "react";
 import {useParams} from "react-router-dom";
+import {useEffect} from "react/cjs/react.production.min";
 
 const Home = () => {
-  //const location = useLocation();
   const {uid} = useParams();
   const [tuits, setTuits] = useState([]);
   const [tuit, setTuit] = useState('');
   const userId = uid;
   const findTuits = () => {
-    if(uid) {
-      return service.findTuitByUser(uid)
-        .then(tuits => setTuits(tuits))
-    } else {
-      return service.findAllTuits()
-        .then(tuits => setTuits(tuits))
-    }
+    // if(uid) {
+    //   service.findTuitByUser(uid)
+    //     .then(tuits => setTuits(tuits))
+    // } else {
+    //   service.findAllTuits()
+    //     .then(tuits => setTuits(tuits))
+    // }
   }
-  // useEffect(() => {
-  //   // let isMounted = true;
-  //   findTuits()
-  //   // return () => {isMounted = false;}
-  // }, [uid,findTuits]);
+  //useEffect(findTuits, []);
   const createTuit = () =>
       service.createTuit(userId, {tuit})
           .then(findTuits)
@@ -68,7 +64,7 @@ const Home = () => {
           </div>
         }
       </div>
-      <Tuits tuits={tuits} deleteTuit={deleteTuit}/>
+      <Tuits tuits={tuits} deleteTuit={deleteTuit} refreshTuit={findTuits}/>
     </div>
   );
 };
