@@ -1,10 +1,9 @@
 import React from "react";
 import Tuits from "../tuits";
 import * as service from "../../services/tuits-service";
-import {useState} from "react";
 import {useParams } from "react-router-dom";
 import TuitPost from "../tuits/tuit-post"
-//import {useEffect} from "react/cjs/react.production.min";
+import {useEffect, useState} from "react";
 
 const Home = () => {
   const {uid} = useParams();
@@ -21,7 +20,7 @@ const Home = () => {
         .then(tuits => setTuits(tuits))
     }
   }
-  //useEffect(() => {}, []);
+  useEffect(findTuits);
   const createTuit = () =>{
       return service.createTuit(userId, {tuit})
           .then(findTuits).catch(e => alert(e))
