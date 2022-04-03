@@ -12,7 +12,6 @@ const LoginDiv = () => {
     const navigate = useNavigate()
     const login = () =>
         authService.login(loginUser)
-            .then(user => alert("welcome " + user.username))
             .then(() => navigate('/profile/mytuits'))
             .catch(e => alert(e));
     return (
@@ -24,7 +23,7 @@ const LoginDiv = () => {
                                      ...loginUser,
                                      username: e.target.value
                                  })} className="mb-2 form-control"/>
-                <input onChange={(e) =>
+                <input type="password" onChange={(e) =>
                     setLoginUser({
                                      ...loginUser,
                                      password: e.target.value

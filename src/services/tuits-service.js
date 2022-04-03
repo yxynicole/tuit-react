@@ -18,7 +18,9 @@ export const findAllTuits = () =>
 
 export const findTuitById = (tid) =>
     axios.get(`${TUITS_API}/${tid}`)
-        .then(response => response.data);
+        .then(response => {
+            return response.data
+        });
 
 export const findTuitByUser = (uid) =>
     api.get(`${USERS_API}/${uid}/tuits`)
@@ -26,7 +28,10 @@ export const findTuitByUser = (uid) =>
 
 export const createTuit = (uid, tuit) =>
     api.post(`${USERS_API}/${uid}/tuits`, tuit)
-        .then(response => response.data);
+        .then(response => {
+            console.log(response.data)
+            return response.data
+        });
 
 export const updateTuit = (tid, tuit) =>
     axios.post(`${TUITS_API}/${tid}`, tuit)
