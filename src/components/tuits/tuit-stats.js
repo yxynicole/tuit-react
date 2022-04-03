@@ -17,12 +17,12 @@ const TuitStats = ({tuit, likeTuit, dislikeTuit}) => {
                     <span onClick={() => likeTuit(tuit)}>
                         {
                             tuit.stats.likes > 0 &&
-                            <i className="fas fa-heart"
+                            <i className="fas fa-thumbs-up"
                                style={{color: 'red'}} />
                         }
                             {
                                 tuit.stats.likes <= 0 &&
-                                <i className="far fa-heart" />
+                                <i className="far fa-thumbs-up" />
                             }
                             {tuit.stats && tuit.stats.likes}
                     </span>

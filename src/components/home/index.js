@@ -4,7 +4,7 @@ import * as service from "../../services/tuits-service";
 import {useState} from "react";
 import {useParams } from "react-router-dom";
 import TuitPost from "../tuits/tuit-post"
-import {useEffect} from "react/cjs/react.production.min";
+//import {useEffect} from "react/cjs/react.production.min";
 
 const Home = () => {
   const {uid} = useParams();
