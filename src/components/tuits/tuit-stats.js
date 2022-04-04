@@ -1,5 +1,5 @@
 import React from "react";
-
+import BookmarkDropdown from "./tuit-bookmark-dropdown";
 const TuitStats = ({tuit, likeTuit, dislikeTuit}) => {
 
     if (tuit.stats) {
@@ -40,10 +40,9 @@ const TuitStats = ({tuit, likeTuit, dislikeTuit}) => {
                         {tuit.stats && tuit.stats.dislikes}
                     </span>
                 </div>
-                {/*<div className="col">*/}
-                {/*    <i className="far fa-inbox-out" />*/}
-                {/*</div>*/}
-
+                <div className="col">
+                    <BookmarkDropdown/>
+                </div>
             </div>
         );
     } else {
