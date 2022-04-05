@@ -2,6 +2,7 @@ import React from "react";
 import './tuits.css';
 import Tuit from "./tuit";
 import * as likesService from "../../services/like-service"
+import * as bookmarkService from "../../services/bookmark-service";
 
 function Tuits({tuits = [], deleteTuit, refreshTuits}) {
     const likeTuit = (tuit) => {
@@ -19,7 +20,12 @@ function Tuits({tuits = [], deleteTuit, refreshTuits}) {
                 refreshTuits()
             }).catch(e => alert(e))
     }
-
+    const bookmarkTuit = (tuit) =>{
+        return bookmarkService.userToggleBookmark("me", tuit._id)
+            .then((d) => {
+                refreshTuits()
+            }).catch(e => alert(e))
+    }
     return (
         <div>
             <ul className="ttr-tuits list-group">
@@ -27,7 +33,9 @@ function Tuits({tuits = [], deleteTuit, refreshTuits}) {
                     tuits.map && tuits.map(tuit => {
                         return (
                             <Tuit key={tuit._id} deleteTuit={deleteTuit} tuit={tuit}
-                                  likeTuit={likeTuit} dislikeTuit={dislikeTuit}/>
+                                  likeTuit={likeTuit} dislikeTuit={dislikeTuit}
+                                  bookmarkTuit={bookmarkTuit}
+                            />
                         );
                     })
                 }

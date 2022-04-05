@@ -20,7 +20,8 @@ const Home = () => {
         .then(tuits => setTuits(tuits))
     }
   }
-  useEffect(findTuits);
+  useEffect(findTuits,[]);
+
   const createTuit = () =>{
       return service.createTuit(userId, {tuit})
           .then(findTuits).catch(e => alert(e))
@@ -29,6 +30,7 @@ const Home = () => {
   const deleteTuit = (tid) =>
       service.deleteTuit(tid)
           .then(findTuits)
+
   return(
     <div className="ttr-home">
       <div className="border border-bottom-0">
