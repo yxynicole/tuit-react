@@ -11,3 +11,7 @@ const api = axios.create(
 export const userToggleBookmark = (uid, tid) =>
     api.put(`${BASE_URL}/users/${uid}/bookmarks/${tid}`)
         .then(response => response.data);
+
+export const findAllTuitsBookmarkedByUser = (uid) =>
+    api.get(`${BASE_URL}/users/${uid}/bookmarks`)
+        .then(response => response.data);
