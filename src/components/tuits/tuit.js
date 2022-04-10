@@ -2,9 +2,12 @@ import React from "react";
 import TuitStats from "./tuit-stats";
 import TuitImage from "./tuit-image";
 import TuitVideo from "./tuit-video";
+import TagManagementModal from "../bookmarks/tag-management-modal";
 
 const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit, bookmarkTuit}) => {
-  return(
+    const tagManageButtonId = "tagManageButtonId"
+
+    return(
     <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
       <div className="pe-2">
         {
@@ -14,7 +17,7 @@ const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit, bookmarkTuit}) => {
         }
       </div>
       <div className="w-100">
-          <i onClick={() => deleteTuit(tuit._id)} className="fas fa-remove fa-2x fa-pull-right"></i>
+          <i onClick={() => deleteTuit(tuit._id)} className="fas fa-remove fa-2x fa-pull-right" />
         <h2
           className="fs-5">
           {tuit.postedBy && tuit.postedBy.username}
@@ -29,8 +32,9 @@ const Tuit = ({tuit, deleteTuit, likeTuit, dislikeTuit, bookmarkTuit}) => {
           tuit.image &&
           <TuitImage tuit={tuit}/>
         }
-        <TuitStats tuit={tuit} likeTuit={likeTuit} dislikeTuit={dislikeTuit} bookmarkTuit={bookmarkTuit} />
+        <TuitStats tagManageButtonId={tagManageButtonId} tuit={tuit} likeTuit={likeTuit} dislikeTuit={dislikeTuit} bookmarkTuit={bookmarkTuit} />
       </div>
+        <TagManagementModal tagManageButtonId={tagManageButtonId} tid={tuit._id}/>
     </li>
   );
 }

@@ -3,8 +3,9 @@ import './tuits.css';
 import Tuit from "./tuit";
 import * as likesService from "../../services/like-service"
 import * as bookmarkService from "../../services/bookmark-service";
+import TagManagementModal from "../bookmarks/tag-management-modal";
 
-function Tuits({tuits = [], deleteTuit, refreshTuits}) {
+function Tuits({ tuits = [], deleteTuit, refreshTuits}) {
     const likeTuit = (tuit) => {
         return likesService
             .userToggleLike("me", tuit._id)
@@ -20,7 +21,7 @@ function Tuits({tuits = [], deleteTuit, refreshTuits}) {
                 refreshTuits()
             }).catch(e => alert(e))
     }
-    const bookmarkTuit = (tuit) =>{
+    const bookmarkTuit = (tuit) => {
         return bookmarkService.userToggleBookmark("me", tuit._id)
             .then((d) => {
                 refreshTuits()
@@ -32,7 +33,8 @@ function Tuits({tuits = [], deleteTuit, refreshTuits}) {
                 {
                     tuits.map && tuits.map(tuit => {
                         return (
-                            <Tuit key={tuit._id} deleteTuit={deleteTuit} tuit={tuit}
+                            <Tuit key={tuit._id}
+                                  deleteTuit={deleteTuit} tuit={tuit}
                                   likeTuit={likeTuit} dislikeTuit={dislikeTuit}
                                   bookmarkTuit={bookmarkTuit}
                             />
@@ -40,6 +42,7 @@ function Tuits({tuits = [], deleteTuit, refreshTuits}) {
                     })
                 }
             </ul>
+
         </div>
     );
 }

@@ -7,9 +7,7 @@ const MyBookmarks =() => {
     const [bookmarkedTuits, setBookmarkedTuits] = useState([]);
     const findTuitsIBookmarked = () =>{
         service.findAllTuitsBookmarkedByUser("me")
-            .then((tuits) => {
-                return setBookmarkedTuits(tuits)
-            });
+            .then(setBookmarkedTuits);
     }
 
     useEffect(findTuitsIBookmarked,[]);

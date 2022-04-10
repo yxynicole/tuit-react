@@ -29,7 +29,6 @@ export const findTuitByUser = (uid) =>
 export const createTuit = (uid, tuit) =>
     api.post(`${USERS_API}/${uid}/tuits`, tuit)
         .then(response => {
-            console.log(response.data)
             return response.data
         });
 

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 const BookmarkIcon = ({bookmarked}) =>{
     if(bookmarked){
         return (<i className="fa-solid fa-bookmark" style={{color:'blue'}}/>)
@@ -7,7 +7,9 @@ const BookmarkIcon = ({bookmarked}) =>{
     }
 }
 
-const BookmarkDropdown = ({clickTags, bookmarked, bookmarkTuit} ) => {
+const BookmarkDropdown = ({ tagManageButtonId,bookmarked, bookmarkTuit} ) => {
+
+
     return (
         <div>
             <div className="dropdown">
@@ -17,12 +19,14 @@ const BookmarkDropdown = ({clickTags, bookmarked, bookmarkTuit} ) => {
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li>
                         <div className="dropdown-item" onClick={bookmarkTuit}>
-                            <BookmarkIcon  bookmarked={bookmarked}/> Bookmark
+                            <BookmarkIcon  bookmarked={bookmarked}/>
+                            <span className="m-1">Bookmark</span>
                         </div>
                     </li>
                     <li>
-                        <div className="dropdown-item" onClick={clickTags} >
-                            <i className="fa-solid fa-tags"/> Manage Tags
+                        <div className="dropdown-item" data-bs-toggle="modal" data-bs-target={"#"+tagManageButtonId}>
+                            <i className="fa-solid fa-tags"/>
+                            <span className="m-1">Manage Tags</span>
                         </div>
                     </li>
                 </ul>

@@ -2,11 +2,7 @@ import React, {useState} from "react";
 import BookmarkDropdown from "./tuit-bookmark-dropdown";
 import * as bookmarkService from "../../services/bookmark-service";
 
-const clickTags = () => {
-    console.log("manage tags clicked");
-}
-
-const TuitStats = ({tuit, likeTuit, dislikeTuit, bookmarkTuit}) => {
+const TuitStats = ({tagManageButtonId,tuit, likeTuit, dislikeTuit, bookmarkTuit}) => {
     if (tuit.stats) {
         return (
             <div className="row mt-2">
@@ -46,7 +42,7 @@ const TuitStats = ({tuit, likeTuit, dislikeTuit, bookmarkTuit}) => {
                     </span>
                 </div>
                 <div className="col">
-                    <BookmarkDropdown clickTags={clickTags}
+                    <BookmarkDropdown tagManageButtonId={tagManageButtonId}
                                       bookmarked={tuit.stats.bookmarked}
                                       bookmarkTuit={()=>bookmarkTuit(tuit)}/>
                 </div>
