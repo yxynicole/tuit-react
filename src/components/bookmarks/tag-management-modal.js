@@ -1,22 +1,9 @@
 import * as service from "../../services/tag-service"
-import {useState, useEffect} from "react";
+import {useState, useRef} from "react";
 
-function TagManagementModal({tid, tagManageButtonId}) {
-    const [tuitTags, setTuitTags] = useState([])
+function TagManagementModal({tuitTags, tagManageButtonId, createTag, deleteTag}) {
     const [inputTagName, setInputTagName] = useState("")
-    const findTuitTags = () => {
-        return service.findAllTagsByTuit('me', tid).then(setTuitTags)
-    }
-
-    const createTag = (tagName) => {
-        service.createTag("me", tid, tagName).then(findTuitTags)
-    }
-
-    const deleteTag = (tagName) => {
-        service.deleteTag("me", tid, tagName).then(findTuitTags)
-    }
-
-    useEffect(findTuitTags, [setTuitTags])
+    const tagInputRef = useRef()
     return (
         <div>
             <div className="modal fade" id={tagManageButtonId} tabIndex="-1"
@@ -30,20 +17,26 @@ function TagManagementModal({tid, tagManageButtonId}) {
                         </div>
                         <div className="modal-body">
                             {tuitTags.map && tuitTags.map(t => {
-                                return <span className="badge rounded-pill bg-secondary m-1 p-2" key={t._id}>
+                                return <span className="badge rounded-pill bg-secondary m-1 p-2"
+                                             key={t._id}>
                                     <span className="m-1 btn-sm">{t.tagName}</span>
-                                    <i className="fa-thin fa-pipe" />
-                                    <i className="fas fa-close btn-sm btn-outline-light" onClick={() => deleteTag(t.tagName)} />
+                                    <i className="fa-thin fa-pipe"/>
+                                    <i className="fas fa-close btn-sm btn-outline-light"
+                                       onClick={() => deleteTag(t.tagName)}/>
                                 </span>
                             })}
                         </div>
                         <div className="modal-footer">
                             <div className="input-group">
-                                <input type="text" className="form-control"
+                                <input type="text" className="form-control" ref={tagInputRef}
                                        placeholder="Enter tag name ..."
                                        onChange={(e) => setInputTagName(e.target.value)}
                                 />
-                                <button className="btn btn-outline-primary" type="button" onClick={() => createTag(inputTagName)}>
+                                <button className="btn btn-outline-primary" type="button"
+                                        onClick={() => {
+                                            createTag(inputTagName)
+                                            tagInputRef.current.value = ""
+                                        }}>
                                     Create
                                 </button>
                                 <button className="btn btn-outline-secondary" type="button"

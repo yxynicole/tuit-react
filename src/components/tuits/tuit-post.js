@@ -1,12 +1,14 @@
-const TuitPost = ({createTuit, setTuit}) => {
+import {useRef} from "react"
 
+const TuitPost = ({createTuit, setTuit}) => {
+    const inputRef = useRef();
     return (
         <div className="p-2 w-100">
-              <textarea
-                  onChange={(e) =>
-                      setTuit(e.target.value)}
-                  placeholder="What's happening?"
-                  className="w-100 border-0"/>
+              <textarea ref={inputRef}
+                        onChange={(e) =>
+                            setTuit(e.target.value)}
+                        placeholder="What's happening?"
+                        className="w-100 border-0"/>
             <div className="row">
                 <div className="col-10 ttr-font-size-150pc text-primary">
                     <i className="fas fa-portrait me-3"/>
@@ -17,9 +19,10 @@ const TuitPost = ({createTuit, setTuit}) => {
                     <i className="far fa-map-location me-3"/>
                 </div>
                 <div className="col-2">
-                    <button onClick={createTuit}
-                            className={`btn btn-primary rounded-pill fa-pull-right
-                                  fw-bold ps-4 pe-4`}>
+                    <button onClick={() => {
+                        createTuit()
+                        inputRef.current.value = ""
+                    }} className={`btn btn-primary rounded-pill fa-pull-right fw-bold ps-4 pe-4`}>
                         Tuit
                     </button>
                 </div>

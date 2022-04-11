@@ -3,18 +3,11 @@ import * as service from "../../services/bookmark-service"
 import {useEffect, useState} from "react";
 
 
-const MyBookmarks =() => {
-    const [bookmarkedTuits, setBookmarkedTuits] = useState([]);
-    const findTuitsIBookmarked = () =>{
-        service.findAllTuitsBookmarkedByUser("me")
-            .then(setBookmarkedTuits);
-    }
-
-    useEffect(findTuitsIBookmarked,[]);
-
+const MyBookmarks =({bookmarkedTuits, refreshTuits}) => {
+    useEffect(refreshTuits,[]);
     return(
       <div className = {"container"}>
-          <Tuits tuits={bookmarkedTuits} refreshTuits={findTuitsIBookmarked}/>
+          <Tuits tuits={bookmarkedTuits} refreshTuits={refreshTuits}/>
       </div>
     );
 

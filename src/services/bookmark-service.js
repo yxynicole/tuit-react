@@ -12,6 +12,7 @@ export const userToggleBookmark = (uid, tid) =>
     api.put(`${BASE_URL}/api/users/${uid}/bookmarks/${tid}`)
         .then(response => response.data);
 
-export const findAllTuitsBookmarkedByUser = (uid) =>
-    api.get(`${BASE_URL}/api/users/${uid}/bookmarks`)
-        .then(response => response.data);
+export const findAllTuitsBookmarkedByUser = (uid, filterTags = []) =>
+    api.get(`${BASE_URL}/api/users/${uid}/bookmarks`, {params: {filterTags}})
+        .then(response => response.data)
+

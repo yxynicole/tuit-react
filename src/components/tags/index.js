@@ -1,24 +1,28 @@
 import React from "react";
 import {useState, useEffect} from "react"
-import * as service from "../../services/tag-service"
+import * as tag_service from "../../services/tag-service";
 
-function TagPanel() {
+function TagPanel({updateFilterTags, isSelected}) {
     const [userTags, setUserTags] = useState([])
-
     const findAllTagsByUser = () => {
-        service.findAllTagsByUser("me").then(setUserTags)
+        tag_service.findAllTagsByUser("me").then(setUserTags)
     }
-
     useEffect(findAllTagsByUser, [setUserTags])
 
     return (
-        <div className="container-lg">
+        <div className="container-fluid">
             {userTags.map && userTags.map(tag_association => {
-                return (<div key={tag_association._id}>
-                    <span className="badge rounded-pill bg-secondary m-1 p-2" >
-                        <span className="m-1 btn-sm">{tag_association.tag.tagName}</span>
+                const tagName = tag_association.tag.tagName;
+                const selected = isSelected(tagName)
+                const classNames = selected ? "badge rounded-pill bg-primary m-1 p-2"
+                                            : "badge rounded-pill bg-secondary m-1 p-2"
+                return (
+                    <span className={classNames} key={tag_association._id}>
+                        <span className="m-1 btn-sm" onClick={() => updateFilterTags(tagName)}>
+                            {tagName}
+                        </span>
                     </span>
-                </div>)
+                )
             })}
         </div>
     )

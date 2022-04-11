@@ -13,7 +13,8 @@ const MyTuits = () => {
     const createTuit = () =>{
         if (tuit.length > 0) {
             return service.createTuit("me", {tuit})
-                .then(findMyTuits).catch(e => console.log(e.response))
+                .then(findMyTuits)
+                .catch(e => console.log(e.response))
         }
     }
 
